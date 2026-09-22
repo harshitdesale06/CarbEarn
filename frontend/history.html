@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Activity History - CarbEarn</title>
+
+    <link rel="stylesheet"
+        href="css/style.css">
+
+</head>
+
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+            CarbEarn
+        </div>
+
+        <nav class="nav-links">
+
+            <a href="dashboard.html">
+                Dashboard
+            </a>
+
+            <a href="activities.html">
+                Activities
+            </a>
+
+            <a href="leaderboard.html">
+                Leaderboard
+            </a>
+
+            <a href="#"
+                id="logoutButton"
+                class="nav-button">
+                Logout
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <main class="history-page">
+
+
+        <section class="history-header">
+
+            <p class="hero-label">
+                ACTIVITY HISTORY
+            </p>
+
+            <h1>
+                Your green
+                <span>journey.</span>
+            </h1>
+
+            <p>
+                View all the eco-friendly activities
+                you have recorded with CarbEarn.
+            </p>
+
+        </section>
+
+
+        <section class="history-summary">
+
+            <div class="history-summary-card">
+
+                <span>
+                    Total Activities
+                </span>
+
+                <strong id="totalActivities">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="history-summary-card">
+
+                <span>
+                    Total CO₂ Saved
+                </span>
+
+                <strong>
+
+                    <span id="totalCO2">
+                        0
+                    </span>
+
+                    kg
+
+                </strong>
+
+            </div>
+
+
+            <div class="history-summary-card">
+
+                <span>
+                    Total Points
+                </span>
+
+                <strong id="totalPoints">
+                    0
+                </strong>
+
+            </div>
+
+        </section>
+
+
+        <section class="history-card">
+
+            <div class="history-card-header">
+
+                <div>
+
+                    <p class="hero-label">
+                        RECORDED ACTIVITIES
+                    </p>
+
+                    <h2>
+                        Activity History
+                    </h2>
+
+                </div>
+
+
+                <a href="activities.html"
+                    class="primary-button">
+                    Add Activity
+                </a>
+
+            </div>
+
+
+            <div
+                id="historyContainer"
+                class="history-container">
+
+                <p class="loading-text">
+                    Loading activity history...
+                </p>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <footer>
+
+        <div class="footer-logo">
+            CarbEarn
+        </div>
+
+        <p>
+            Smart Carbon Footprint Tracking System
+        </p>
+
+    </footer>
+
+
+    <script src="js/history.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+```
+<meta charset="UTF-8">
+
+<meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+<title>Activities - CarbEarn</title>
+
+<link rel="stylesheet"
+    href="css/style.css">
+```
+
+</head>
+
+<body>
+
+```
+<header class="navbar">
+
+    <div class="logo">
+        CarbEarn
+    </div>
+
+    <nav class="nav-links">
+
+        <a href="dashboard.html">
+            Dashboard
+        </a>
+
+        <a href="activities.html">
+            Activities
+        </a>
+
+        <a href="history.html">
+            History
+        </a>
+
+        <a href="leaderboard.html">
+            Leaderboard
+        </a>
+
+        <a href="#"
+            id="logoutButton"
+            class="nav-button">
+            Logout
+        </a>
+
+    </nav>
+
+</header>
+
+
+<main class="activities-page">
+
+    <section class="activities-header">
+
+        <p class="hero-label">
+            CARBEARN ACTIVITIES
+        </p>
+
+        <h1>
+            Record Your
+            <span>Green Activity.</span>
+        </h1>
+
+        <p>
+            Add your eco-friendly activities and
+            track the carbon emissions you help save.
+        </p>
+
+    </section>
+
+
+    <section class="activity-layout">
+
+
+        <!-- Add Activity -->
+
+        <div class="activity-card">
+
+            <div class="activity-card-header">
+
+                <div>
+
+                    <p class="hero-label">
+                        ADD ACTIVITY
+                    </p>
+
+                    <h2>
+                        Record Activity
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <form id="activityForm">
+
+
+                <!-- Activity -->
+
+                <div class="form-group">
+
+                    <label for="activity">
+                        Activity
+                    </label>
+
+                    <select id="activity"
+                        required>
+
+                        <option value="">
+                            Loading activities...
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Quantity -->
+
+                <div class="form-group">
+
+                    <label for="quantity">
+                        Quantity
+                    </label>
+
+                    <input
+                        type="number"
+                        id="quantity"
+                        min="0.01"
+                        step="0.01"
+                        placeholder="Enter quantity"
+                        required>
+
+                    <p id="unitText"
+                        class="input-help">
+                        Select an activity first
+                    </p>
+
+                </div>
+
+
+                <!-- Frequency -->
+
+                <div class="form-group">
+
+                    <label for="frequency">
+                        Frequency
+                    </label>
+
+                    <input
+                        type="number"
+                        id="frequency"
+                        min="1"
+                        step="1"
+                        placeholder="Times per week"
+                        required>
+
+                    <p class="input-help">
+                        How many times do you perform
+                        this activity per week?
+                    </p>
+
+                </div>
+
+
+                <!-- Date -->
+
+                <div class="form-group">
+
+                    <label for="activityDate">
+                        Activity Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="activityDate"
+                        required>
+
+                </div>
+
+
+                <!-- Description -->
+
+                <div class="activity-description-box">
+
+                    <strong>
+                        Activity Description
+                    </strong>
+
+                    <p id="activityDescription">
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="primary-button">
+
+                    Add Activity
+
+                </button>
+
+
+                <p id="activityMessage"
+                    class="form-message">
+                </p>
+
+            </form>
+
+        </div>
+
+
+        <!-- Available Activities -->
+
+        <div class="activity-card">
+
+            <div class="activity-card-header">
+
+                <div>
+
+                    <p class="hero-label">
+                        AVAILABLE ACTIVITIES
+                    </p>
+
+                    <h2>
+                        Green Activities
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div id="activityList"
+                class="activity-list">
+
+                <p>
+                    Loading activities...
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Success Card -->
+
+    <section
+        id="successCard"
+        class="success-card"
+        style="display: none;">
+
+        <p class="hero-label">
+            ACTIVITY RECORDED
+        </p>
+
+        <h2>
+            Great Work!
+        </h2>
+
+        <p>
+            Your activity has been recorded successfully.
+        </p>
+
+
+        <div class="success-stats">
+
+
+            <div>
+
+                <strong id="savedCO2">
+                    0
+                </strong>
+
+                <span>
+                    kg CO₂ Saved
+                </span>
+
+            </div>
+
+
+            <div>
+
+                <strong id="earnedPoints">
+                    0
+                </strong>
+
+                <span>
+                    Carbon Points
+                </span>
+
+            </div>
+
+
+            <div>
+
+                <strong id="activityImpact">
+                    -
+                </strong>
+
+                <span>
+                    Calculated Impact
+                </span>
+
+            </div>
+
+
+            <div>
+
+                <strong id="mlPrediction">
+                    -
+                </strong>
+
+                <span>
+                    ML Prediction
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <a href="dashboard.html"
+            class="secondary-button">
+
+            View Dashboard
+
+        </a>
+
+    </section>
+
+
+</main>
+
+
+<footer>
+
+    <div class="footer-logo">
+        CarbEarn
+    </div>
+
+    <p>
+        Smart Carbon Footprint Tracking System
+    </p>
+
+</footer>
+
+
+<script src="js/activities.js"></script>
+```
+
+</body>
+
+</html>

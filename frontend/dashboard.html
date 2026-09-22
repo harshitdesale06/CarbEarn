@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard - CarbEarn</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+            CarbEarn
+        </div>
+
+        <nav class="nav-links">
+
+            <a href="dashboard.html">
+                Dashboard
+            </a>
+
+            <a href="activities.html">
+                Activities
+            </a>
+
+            <a href="history.html">
+                History
+            </a>
+
+            <a href="leaderboard.html">
+                Leaderboard
+            </a>
+
+            <a href="#" id="logoutButton" class="nav-button">
+                Logout
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <main class="dashboard-page">
+
+
+        <section class="dashboard-header">
+
+            <div>
+
+                <p class="hero-label">
+                    CARBEARN DASHBOARD
+                </p>
+
+                <h1>
+                    Welcome,
+                    <span id="userName">
+                        User
+                    </span>
+                </h1>
+
+                <p>
+                    Track your environmental activities
+                    and monitor your carbon impact.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <section class="stats-grid">
+
+
+            <div class="stat-card">
+
+                <p>
+                    Total Activities
+                </p>
+
+                <h2 id="totalActivities">
+                    0
+                </h2>
+
+                <span>
+                    Activities recorded
+                </span>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <p>
+                    CO₂ Saved
+                </p>
+
+                <h2>
+
+                    <span id="totalCO2">
+                        0
+                    </span>
+
+                    <small>
+                        kg
+                    </small>
+
+                </h2>
+
+                <span>
+                    Estimated carbon saved
+                </span>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <p>
+                    Carbon Points
+                </p>
+
+                <h2 id="totalPoints">
+                    0
+                </h2>
+
+                <span>
+                    Points earned
+                </span>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <p>
+                    Overall Impact
+                </p>
+
+                <h2 id="overallImpact">
+                    Low
+                </h2>
+
+                <span>
+                    Based on your activity
+                </span>
+
+            </div>
+
+
+        </section>
+
+
+        <section class="dashboard-grid">
+
+
+            <div class="dashboard-card">
+
+                <div class="card-title">
+
+                    <div>
+
+                        <p class="hero-label">
+                            IMPACT
+                        </p>
+
+                        <h2>
+                            Impact Breakdown
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="impact-item">
+
+                    <div class="impact-info">
+
+                        <span>
+                            Low Impact
+                        </span>
+
+                        <strong id="lowImpact">
+                            0
+                        </strong>
+
+                    </div>
+
+                    <div class="impact-bar">
+
+                        <div id="lowImpactBar" class="impact-fill">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="impact-item">
+
+                    <div class="impact-info">
+
+                        <span>
+                            Medium Impact
+                        </span>
+
+                        <strong id="mediumImpact">
+                            0
+                        </strong>
+
+                    </div>
+
+                    <div class="impact-bar">
+
+                        <div id="mediumImpactBar" class="impact-fill">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="impact-item">
+
+                    <div class="impact-info">
+
+                        <span>
+                            High Impact
+                        </span>
+
+                        <strong id="highImpact">
+                            0
+                        </strong>
+
+                    </div>
+
+                    <div class="impact-bar">
+
+                        <div id="highImpactBar" class="impact-fill">
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-card">
+
+                <p class="hero-label">
+                    QUICK ACTIONS
+                </p>
+
+                <h2>
+                    Manage your activities
+                </h2>
+
+                <p class="dashboard-description">
+                    Record a new green activity or
+                    view your previous activities.
+                </p>
+
+
+                <div class="quick-actions">
+
+                    <a href="activities.html" class="primary-button">
+                        Add Activity
+                    </a>
+
+                    <a href="history.html" class="secondary-button">
+                        View Activities
+                    </a>
+
+                    <a href="leaderboard.html" class="secondary-button">
+                        View Leaderboard
+                    </a>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+        <section class="dashboard-card profile-card">
+
+            <p class="hero-label">
+                ACCOUNT
+            </p>
+
+            <h2>
+                Your Profile
+            </h2>
+
+
+            <div class="profile-details">
+
+                <div>
+
+                    <span>
+                        Name
+                    </span>
+
+                    <strong id="profileName">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Email
+                    </span>
+
+                    <strong id="profileEmail">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        College
+                    </span>
+
+                    <strong id="profileCollege">
+                        -
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <footer>
+
+        <div class="footer-logo">
+            CarbEarn
+        </div>
+
+        <p>
+            Smart Carbon Footprint Tracking System
+        </p>
+
+    </footer>
+
+
+    <script src="js/dashboard.js"></script>
+
+</body>
+
+</html>
