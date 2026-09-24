@@ -143,6 +143,16 @@ async function loadDashboard() {
         }
 
 
+        // Load recent activities
+        loadRecentActivities(
+            data.recent_activities
+        );
+
+        updateGoalProgress(
+            summary.total_co2_saved
+        );
+
+
     } catch (error) {
 
         console.error(
@@ -155,6 +165,172 @@ async function loadDashboard() {
         );
 
     }
+
+}
+
+
+function loadRecentActivities(
+    activities
+) {
+
+    const container =
+        document.getElementById(
+            "recentActivities"
+        );
+
+
+    if (!container) {
+        return;
+    }
+
+
+    if (
+        !activities ||
+        activities.length === 0
+    ) {
+
+        container.innerHTML = `
+            <div class="empty-recent">
+                <p>No activities recorded yet.</p>
+
+                <a
+                    href="activities.html"
+                    class="primary-button">
+                    Add Activity
+                </a>
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML = "";
+
+
+    activities.forEach(
+        function (activity) {
+
+            const item =
+                document.createElement(
+                    "div"
+                );
+
+
+            item.className =
+                "recent-activity-item";
+
+
+            item.innerHTML = `
+                <div class="recent-activity-main">
+
+                    <div class="recent-activity-icon">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            ${activity.activity_name}
+                        </h3>
+
+                        <p>
+                            ${activity.quantity}
+                            ${activity.unit}
+                            ·
+                            ${activity.frequency}
+                            time(s)/week
+                        </p>
+
+                        <span>
+                            ${activity.activity_date}
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="recent-activity-values">
+
+                    <div>
+                        <strong>
+                            ${activity.co2_saved}
+                        </strong>
+
+                        <span>
+                            kg CO₂
+                        </span>
+                    </div>
+
+
+                    <div>
+                        <strong>
+                            ${activity.points}
+                        </strong>
+
+                        <span>
+                            points
+                        </span>
+                    </div>
+
+
+                    <span
+                        class="impact-badge impact-${activity.impact.toLowerCase()}">
+                        ${activity.impact}
+                    </span>
+
+
+                    <span
+                        class="impact-badge impact-${(
+                            activity.ml_prediction ||
+                            "low"
+                        ).toLowerCase()}">
+                        ML:
+                        ${activity.ml_prediction || "N/A"}
+                    </span>
+
+                </div>
+            `;
+
+
+            container.appendChild(
+                item
+            );
+
+        }
+    );
+
+}
+
+function updateGoalProgress(totalCO2) {
+
+    const goal =
+        50;
+
+    const percentage =
+        Math.min(
+            (Number(totalCO2) / goal) * 100,
+            100
+        );
+
+    document.getElementById(
+        "goalCO2"
+    ).textContent =
+        Number(totalCO2).toFixed(2);
+
+
+    document.getElementById(
+        "goalProgress"
+    ).style.width =
+        percentage + "%";
+
+
+    document.getElementById(
+        "goalPercentage"
+    ).textContent =
+        Math.round(percentage) + "%";
 
 }
 

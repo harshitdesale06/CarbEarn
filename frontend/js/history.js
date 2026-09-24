@@ -1,9 +1,14 @@
 const userData =
     localStorage.getItem("carbearn_user");
 
+
 if (!userData) {
-    window.location.href = "login.html";
+
+    window.location.href =
+        "login.html";
+
 }
+
 
 const user =
     JSON.parse(userData);
@@ -14,6 +19,20 @@ const historyContainer =
         "historyContainer"
     );
 
+
+const impactFilter =
+    document.getElementById(
+        "impactFilter"
+    );
+
+
+const activityFilter =
+    document.getElementById(
+        "activityFilter"
+    );
+
+
+let allActivities = [];
 
 
 async function loadHistory() {
@@ -36,7 +55,12 @@ async function loadHistory() {
                 "<p>Failed to load activity history.</p>";
 
             return;
+
         }
+
+
+        allActivities =
+            data.activities;
 
 
         document.getElementById(
@@ -79,165 +103,11 @@ async function loadHistory() {
             totalPoints;
 
 
+        loadActivityFilter();
 
-        if (data.activities.length === 0) {
 
-            historyContainer.innerHTML = `
-
-                <div class="empty-history">
-
-                    <h3>
-                        No activities yet
-                    </h3>
-
-                    <p>
-                        Start recording your
-                        eco-friendly activities
-                        to see them here.
-                    </p>
-
-                    <a
-                        href="activities.html"
-                        class="primary-button">
-
-                        Add Your First Activity
-
-                    </a>
-
-                </div>
-
-            `;
-
-            return;
-        }
-
-
-
-        historyContainer.innerHTML = "";
-
-
-
-        data.activities.forEach(
-            function (activity) {
-
-                const item =
-                    document.createElement(
-                        "div"
-                    );
-
-
-                item.className =
-                    "history-item";
-
-
-                item.innerHTML = `
-
-                    <div class="history-main">
-
-                        <div class="history-icon">
-                            ✓
-                        </div>
-
-
-                        <div>
-
-                            <h3>
-                                ${activity.activity_name}
-                            </h3>
-
-
-                            <p>
-
-                                ${activity.quantity}
-                                ${activity.unit}
-
-                                ·
-
-                                ${activity.frequency}
-                                time(s)/week
-
-                                ·
-
-                                ${activity.activity_date}
-
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-
-                    <div class="history-values">
-
-
-                        <div>
-
-                            <strong>
-
-                                ${Number(
-                                    activity.co2_saved
-                                ).toFixed(2)}
-
-                            </strong>
-
-                            <span>
-                                kg CO₂
-                            </span>
-
-                        </div>
-
-
-
-                        <div>
-
-                            <strong>
-
-                                ${activity.points}
-
-                            </strong>
-
-                            <span>
-                                points
-                            </span>
-
-                        </div>
-
-
-
-                        <span
-                            class="impact-badge
-                            impact-${activity.impact.toLowerCase()}">
-
-                            ${activity.impact}
-
-                        </span>
-
-
-
-                        <span
-                            class="impact-badge
-                            impact-${(
-                                activity.ml_prediction ||
-                                "Low"
-                            ).toLowerCase()}">
-
-                            ML:
-                            ${activity.ml_prediction || "N/A"}
-
-                        </span>
-
-
-                    </div>
-
-                `;
-
-
-                historyContainer.appendChild(
-                    item
-                );
-
-            }
+        displayActivities(
+            allActivities
         );
 
 
@@ -256,6 +126,266 @@ async function loadHistory() {
 
 }
 
+
+function loadActivityFilter() {
+
+    const activityTypes =
+        [];
+
+
+    allActivities.forEach(
+        function (activity) {
+
+            if (
+                !activityTypes.includes(
+                    activity.activity_name
+                )
+            ) {
+
+                activityTypes.push(
+                    activity.activity_name
+                );
+
+            }
+
+        }
+    );
+
+
+    activityTypes.sort();
+
+
+    activityTypes.forEach(
+        function (activityName) {
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+
+            option.value =
+                activityName;
+
+
+            option.textContent =
+                activityName;
+
+
+            activityFilter.appendChild(
+                option
+            );
+
+        }
+    );
+
+}
+
+
+function displayActivities(
+    activities
+) {
+
+    if (
+        activities.length === 0
+    ) {
+
+        historyContainer.innerHTML = `
+            <div class="empty-history">
+
+                <h3>
+                    No activities found
+                </h3>
+
+                <p>
+                    No activities match
+                    the selected filters.
+                </p>
+
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    historyContainer.innerHTML =
+        "";
+
+
+    activities.forEach(
+        function (activity) {
+
+            const item =
+                document.createElement(
+                    "div"
+                );
+
+
+            item.className =
+                "history-item";
+
+
+            item.innerHTML = `
+                <div class="history-main">
+
+                    <div class="history-icon">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            ${activity.activity_name}
+                        </h3>
+
+                        <p>
+
+                            ${activity.quantity}
+                            ${activity.unit}
+
+                            ·
+
+                            ${activity.frequency}
+                            time(s)/week
+
+                            ·
+
+                            ${activity.activity_date}
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="history-values">
+
+                    <div>
+
+                        <strong>
+                            ${Number(
+                                activity.co2_saved
+                            ).toFixed(2)}
+                        </strong>
+
+                        <span>
+                            kg CO₂
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            ${activity.points}
+                        </strong>
+
+                        <span>
+                            points
+                        </span>
+
+                    </div>
+
+
+                    <span
+                        class="impact-badge
+                        impact-${activity.impact.toLowerCase()}">
+
+                        ${activity.impact}
+
+                    </span>
+
+
+                    <span
+                        class="impact-badge
+                        impact-${(
+                            activity.ml_prediction ||
+                            "low"
+                        ).toLowerCase()}">
+
+                        ML:
+                        ${activity.ml_prediction || "N/A"}
+
+                    </span>
+
+                </div>
+            `;
+
+
+            historyContainer.appendChild(
+                item
+            );
+
+        }
+    );
+
+}
+
+
+function applyFilters() {
+
+    const selectedImpact =
+        impactFilter.value;
+
+
+    const selectedActivity =
+        activityFilter.value;
+
+
+    const filteredActivities =
+        allActivities.filter(
+            function (activity) {
+
+                const impactMatches =
+                    selectedImpact === "All" ||
+                    activity.impact ===
+                        selectedImpact;
+
+
+                const activityMatches =
+                    selectedActivity === "All" ||
+                    activity.activity_name ===
+                        selectedActivity;
+
+
+                return (
+                    impactMatches &&
+                    activityMatches
+                );
+
+            }
+        );
+
+
+    displayActivities(
+        filteredActivities
+    );
+
+}
+
+
+impactFilter.addEventListener(
+    "change",
+    function () {
+
+        applyFilters();
+
+    }
+);
+
+
+activityFilter.addEventListener(
+    "change",
+    function () {
+
+        applyFilters();
+
+    }
+);
 
 
 document.getElementById(
@@ -277,7 +407,6 @@ document.getElementById(
 
     }
 );
-
 
 
 loadHistory();

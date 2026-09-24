@@ -66,6 +66,75 @@ const getDashboardSummary = async (req, res) => {
         }
 
 
+        // Get recent activities
+        const [recentActivities] = await pool.query(
+            `SELECT
+                ua.id,
+                a.name AS activity_name,
+                a.unit,
+                ua.quantity,
+                ua.frequency,
+                ua.co2_saved,
+                ua.points,
+                ua.impact,
+                ua.ml_prediction,
+                ua.activity_date
+
+             FROM user_activities ua
+
+             JOIN activities a
+                ON ua.activity_id = a.id
+
+             WHERE ua.user_id = ?
+
+             ORDER BY
+                ua.activity_date DESC,
+                ua.created_at DESC
+
+             LIMIT 5`,
+            [userId]
+        );
+
+
+        const formattedRecentActivities =
+            recentActivities.map(function (activity) {
+                return {
+                    id: activity.id,
+
+                    activity_name:
+                        activity.activity_name,
+
+                    unit:
+                        activity.unit,
+
+                    quantity:
+                        Number(activity.quantity),
+
+                    frequency:
+                        Number(activity.frequency),
+
+                    co2_saved:
+                        Number(
+                            Number(
+                                activity.co2_saved
+                            ).toFixed(2)
+                        ),
+
+                    points:
+                        Number(activity.points),
+
+                    impact:
+                        activity.impact,
+
+                    ml_prediction:
+                        activity.ml_prediction || null,
+
+                    activity_date:
+                        activity.activity_date
+                };
+            });
+
+
         res.json({
             user: {
                 id: user.id,
@@ -76,7 +145,8 @@ const getDashboardSummary = async (req, res) => {
 
             summary: {
                 total_activities: totalActivities,
-                total_co2_saved: Number(totalCO2.toFixed(2)),
+                total_co2_saved:
+                    Number(totalCO2.toFixed(2)),
                 total_points: totalPoints,
                 overall_impact: overallImpact
             },
@@ -85,15 +155,22 @@ const getDashboardSummary = async (req, res) => {
                 low: Number(data.low_impact),
                 medium: Number(data.medium_impact),
                 high: Number(data.high_impact)
-            }
+            },
+
+            recent_activities:
+                formattedRecentActivities
         });
 
 
     } catch (error) {
-        console.error("Dashboard error:", error.message);
+        console.error(
+            "Dashboard error:",
+            error.message
+        );
 
         res.status(500).json({
-            message: "Failed to fetch dashboard data"
+            message:
+                "Failed to fetch dashboard data"
         });
     }
 };
