@@ -284,9 +284,9 @@ function loadRecentActivities(
 
                     <span
                         class="impact-badge impact-${(
-                            activity.ml_prediction ||
-                            "low"
-                        ).toLowerCase()}">
+                    activity.ml_prediction ||
+                    "low"
+                ).toLowerCase()}">
                         ML:
                         ${activity.ml_prediction || "N/A"}
                     </span>
@@ -335,7 +335,90 @@ function updateGoalProgress(totalCO2) {
 }
 
 
+async function loadRecommendation() {
+
+    const container =
+        document.getElementById(
+            "recommendationContent"
+        );
+
+
+    if (!container) {
+        return;
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                `http://localhost:5000/api/recommendations/${user.id}`
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            container.innerHTML = `
+                <p>
+                    Unable to load recommendation.
+                </p>
+            `;
+
+            return;
+
+        }
+
+
+        container.innerHTML = `
+            <div class="recommendation-main">
+
+                <h3>
+                    ${data.recommendation}
+                </h3>
+
+                <p>
+                    ${data.reason}
+                </p>
+
+            </div>
+
+
+            <div class="recommendation-source">
+
+                Based on your activity:
+                <strong>
+                    ${data.based_on_activity}
+                </strong>
+
+            </div>
+        `;
+
+
+    } catch (error) {
+
+        console.error(
+            "Recommendation error:",
+            error
+        );
+
+
+        container.innerHTML = `
+            <p>
+                Cannot connect to recommendation service.
+            </p>
+        `;
+
+    }
+
+}
+
 loadDashboard();
+
+loadRecommendation();
 
 
 document.getElementById(

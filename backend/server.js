@@ -8,6 +8,8 @@ const activityRoutes = require("./routes/activityRoutes");
 const dashboardRoutes = require("./routes/dashboardRoutes");
 const leaderboardRoutes = require("./routes/leaderboardRoutes");
 const mlRoutes = require("./routes/mlRoutes");
+const recommendationRoutes =
+    require("./routes/recommendationRoutes");
 
 const app = express();
 
@@ -43,6 +45,10 @@ app.use("/api/activities", activityRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/leaderboard", leaderboardRoutes);
 app.use("/api/ml", mlRoutes);
+app.use(
+    "/api/recommendations",
+    recommendationRoutes
+);
 
 const PORT = process.env.PORT || 5000;
 
