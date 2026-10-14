@@ -60,6 +60,11 @@ loginForm.addEventListener(
                     JSON.stringify(data.user)
                 );
 
+                localStorage.setItem(
+                    "carbearn_token",
+                    data.token
+                );
+
 
                 loginMessage.textContent =
                     "Login successful! Redirecting...";
@@ -70,8 +75,11 @@ loginForm.addEventListener(
 
                 setTimeout(function () {
 
-                    window.location.href =
-                        "dashboard.html";
+                    if (data.user.role === "ADMIN") {
+                        window.location.href = "admin.html";
+                    } else {
+                        window.location.href = "dashboard.html";
+                    }
 
                 }, 1000);
 

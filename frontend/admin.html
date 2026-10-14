@@ -1,0 +1,289 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Panel | CarbEarn</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+
+<body class="admin-page">
+
+    <div class="admin-layout">
+
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+
+            <a href="admin.html" class="admin-brand">
+                <span class="admin-brand-icon">C</span>
+                <span>Carb<span class="admin-brand-highlight">Earn</span>
+                    <small>ADMINISTRATION</small>
+                </span>
+            </a>
+
+            <div class="admin-profile">
+                <div class="admin-avatar">A</div>
+                <div>
+                    <strong>Administrator</strong>
+                    <span>Platform Manager</span>
+                </div>
+            </div>
+
+            <nav class="admin-navigation">
+                <p class="admin-nav-label">WORKSPACE</p>
+
+                <a href="#overview" class="admin-nav-link active">
+                    <span>▦</span> Overview
+                </a>
+
+                <a href="#users" class="admin-nav-link">
+                    <span>♙</span> User Management
+                </a>
+
+                <a href="#activities" class="admin-nav-link">
+                    <span>↗</span> Green Activities
+                </a>
+            </nav>
+
+            <div class="admin-sidebar-bottom">
+                <div class="admin-sidebar-note">
+                    <span>🌱</span>
+                    <strong>Small actions.</strong>
+                    <p>A greener future starts with every action.</p>
+                </div>
+
+                <button
+                    type="button"
+                    id="adminLogout"
+                    class="admin-logout"
+                >
+                    <span>↪</span> Log out
+                </button>
+            </div>
+
+        </aside>
+
+        <!-- Main content -->
+        <main class="admin-main">
+
+            <!-- Top bar -->
+            <header class="admin-topbar">
+                <div class="admin-breadcrumb">
+                    CarbEarn <span>/</span> Administration
+                </div>
+
+                <div class="admin-topbar-right">
+                    <span class="admin-status-dot"></span>
+                    Platform overview
+                    <div class="admin-topbar-avatar">A</div>
+                </div>
+            </header>
+
+            <div class="admin-content">
+
+                <!-- Page heading -->
+                <section class="admin-page-heading" id="overview">
+                    <div>
+                        <p class="admin-eyebrow">
+                            CONTROL CENTER
+                        </p>
+
+                        <h1>Admin Overview</h1>
+
+                        <p class="admin-subtitle">
+                            Monitor your community's progress toward
+                            a more sustainable future.
+                        </p>
+                    </div>
+
+                    <button
+                        type="button"
+                        id="refreshAdmin"
+                        class="admin-refresh-button"
+                    >
+                        ↻ Refresh data
+                    </button>
+                </section>
+
+                <p
+                    id="adminMessage"
+                    class="admin-message"
+                    role="status"
+                    aria-live="polite"
+                ></p>
+
+                <!-- Statistics -->
+                <section class="admin-stats-grid">
+
+                    <article class="admin-stat-card">
+                        <div class="admin-stat-top">
+                            <span>Total users</span>
+                            <span class="admin-stat-icon users-icon">♙</span>
+                        </div>
+
+                        <h2 id="totalUsers">—</h2>
+
+                        <p>Registered community members</p>
+                    </article>
+
+                    <article class="admin-stat-card">
+                        <div class="admin-stat-top">
+                            <span>Recorded activities</span>
+                            <span class="admin-stat-icon activity-icon">↗</span>
+                        </div>
+
+                        <h2 id="totalActivities">—</h2>
+
+                        <p>Green actions recorded</p>
+                    </article>
+
+                    <article class="admin-stat-card">
+                        <div class="admin-stat-top">
+                            <span>CO₂ saved</span>
+                            <span class="admin-stat-icon carbon-icon">♧</span>
+                        </div>
+
+                        <h2 id="totalCO2Saved">—</h2>
+
+                        <p>Total recorded carbon savings in kg</p>
+                    </article>
+
+                    <article class="admin-stat-card">
+                        <div class="admin-stat-top">
+                            <span>Active contributors</span>
+                            <span class="admin-stat-icon active-icon">✓</span>
+                        </div>
+
+                        <h2 id="activeUsers">—</h2>
+
+                        <p>Users with recorded activities</p>
+                    </article>
+
+                </section>
+
+                <!-- User management -->
+                <section class="admin-panel-section" id="users">
+
+                    <div class="admin-section-heading">
+                        <div>
+                            <p class="admin-eyebrow">COMMUNITY</p>
+                            <h2>User Management</h2>
+                            <p>View registered members and their roles.</p>
+                        </div>
+
+                        <span id="userCountLabel" class="admin-count-badge">
+                            Loading...
+                        </span>
+                    </div>
+
+                    <div class="admin-table-card">
+                        <div class="admin-table-toolbar">
+                            <div>
+                                <strong>Registered users</strong>
+                                <p>CarbEarn community directory</p>
+                            </div>
+
+                            <input
+                                type="search"
+                                id="userSearch"
+                                class="admin-search"
+                                placeholder="Search users..."
+                                aria-label="Search users"
+                            >
+                        </div>
+
+                        <div class="admin-table-wrapper">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>Member</th>
+                                        <th>College</th>
+                                        <th>Role</th>
+                                        <th>Joined</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="usersTableBody">
+                                    <tr>
+                                        <td colspan="4" class="admin-empty-state">
+                                            Loading registered users...
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="admin-table-footer">
+                            <span id="userTableFooter">
+                                Loading users...
+                            </span>
+                        </div>
+                    </div>
+
+                </section>
+
+                <!-- Recent activities -->
+                <section
+                    class="admin-panel-section"
+                    id="activities"
+                >
+                    <div class="admin-section-heading">
+                        <div>
+                            <p class="admin-eyebrow">SUSTAINABILITY</p>
+                            <h2>Recent Green Activities</h2>
+                            <p>See the latest actions recorded by members.</p>
+                        </div>
+                    </div>
+
+                    <div class="admin-table-card">
+                        <div class="admin-table-toolbar">
+                            <div>
+                                <strong>Latest contributions</strong>
+                                <p>Most recent 10 recorded activities</p>
+                            </div>
+                        </div>
+
+                        <div class="admin-table-wrapper">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>Member</th>
+                                        <th>Activity</th>
+                                        <th>Quantity</th>
+                                        <th>CO₂ saved</th>
+                                        <th>Points</th>
+                                        <th>Impact</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="activitiesTableBody">
+                                    <tr>
+                                        <td colspan="7" class="admin-empty-state">
+                                            Loading recent activities...
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <footer class="admin-footer">
+                    <span>CarbEarn Administration</span>
+                    <span>Building a greener tomorrow 🌱</span>
+                </footer>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script src="js/admin.js"></script>
+
+</body>
+</html>

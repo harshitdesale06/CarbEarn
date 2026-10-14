@@ -10,6 +10,7 @@ const leaderboardRoutes = require("./routes/leaderboardRoutes");
 const mlRoutes = require("./routes/mlRoutes");
 const recommendationRoutes =
     require("./routes/recommendationRoutes");
+const adminRoutes = require("./routes/adminRoutes");
 
 const app = express();
 
@@ -49,6 +50,7 @@ app.use(
     "/api/recommendations",
     recommendationRoutes
 );
+app.use("/api/admin", adminRoutes);
 
 const PORT = process.env.PORT || 5000;
 
